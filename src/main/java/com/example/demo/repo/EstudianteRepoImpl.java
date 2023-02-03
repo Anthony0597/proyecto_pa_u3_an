@@ -1,5 +1,7 @@
 package com.example.demo.repo;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.modelo.Estudiante;
@@ -31,7 +33,37 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 	@Override
 	public Estudiante buscarPorApellidoQuery(String apellido) {
 		// TODO Auto-generated method stub
-		return null;
+		Query jplQuery= this.entityManager.createQuery(
+				"select e from Estudiante e where e.apellido = :datoApellido");
+		jplQuery.setParameter("datoApellido", apellido);
+			return (Estudiante) jplQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaQuery(String cedula) {
+		// TODO Auto-generated method stub
+		Query jplQuery= this.entityManager.createQuery(
+				"select e from Estudiante e where e.cedula = :datoCedula");
+		jplQuery.setParameter("datoCedula", cedula);
+			return (Estudiante) jplQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorFechaNacimientoQuery(LocalDateTime fechaNacimiento) {
+		// TODO Auto-generated method stub
+		Query jplQuery= this.entityManager.createQuery(
+				"select e from Estudiante e where e.fechaNacimiento = :datoFechaNacimiento");
+		jplQuery.setParameter("datoFechaNacimiento", fechaNacimiento);
+			return (Estudiante) jplQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorGeneroQuery(String genero) {
+		// TODO Auto-generated method stub
+		Query jplQuery =  this.entityManager.createQuery(
+				"select e from Estudiante e where e.genero = :datoGenero");
+		jplQuery.setParameter("datoGenero", genero);
+		return (Estudiante) jplQuery.getSingleResult();
 	}
 
 }

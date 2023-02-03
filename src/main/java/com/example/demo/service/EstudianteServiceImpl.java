@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,24 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	public Estudiante buscarPorApellido(String apellido) {
 		// TODO Auto-generated method stub
 		return this.estudianteRepo.buscarPorApellidoQuery(apellido);
+	}
+
+	@Override
+	public Estudiante buscarPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorCedulaQuery(cedula);
+	}
+
+	@Override
+	public Estudiante buscarPorFechaNacimiento(LocalDateTime fechaNacimiento) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorFechaNacimientoQuery(fechaNacimiento);
+	}
+
+	@Override
+	public Estudiante buscarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorGeneroQuery(genero);
 	}
 
 }
