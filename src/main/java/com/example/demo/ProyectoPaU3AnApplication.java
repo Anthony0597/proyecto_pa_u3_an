@@ -25,7 +25,9 @@ public class ProyectoPaU3AnApplication implements CommandLineRunner{
 	@Autowired
 	private IVehiculoService vehiculoService;
 	@Autowired
-	private IRentaService rentaService;
+	private IRentaService rentaService;	
+	@Autowired
+	private IEstudianteService estudianteService;	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoPaU3AnApplication.class, args);
@@ -35,23 +37,20 @@ public class ProyectoPaU3AnApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		//CREATE
-				Vehiculo vehi = new Vehiculo();
-				vehi.setNumeroPuertas(5);
-				vehi.setPlaca("IBR-2479");
-				vehi.setTipoDireccion("hidraulica");
-				vehi.setTraccion("4x2");
-								
-				Cliente clie = new Cliente();
-				clie.setCedula("1151561532");
-				clie.setNombre("Mauricio");
-				clie.setApellido("Torres");
-				clie.setEdad(28);				
-				
-				this.vehiculoService.guardar(vehi);
-				this.clienteService.guardar(clie);
-				
-				this.rentaService.ingresar(vehi.getPlaca(), clie.getCedula());
-				
+		Estudiante estu = this.estudianteService.buscarPorNombreTypedQuery("Anthony");
+		System.out.println("consulta 1: "+estu);		
+		
+		estu = this.estudianteService.buscarPorNombreNamedQuery("Anthony");
+		System.out.println("consulta 2: "+estu);
+		
+		estu = this.estudianteService.buscarPorNombreNamedQueryTyped("Anthony");
+		System.out.println("consulta 3: "+estu);
+		
+		estu = this.estudianteService.buscarPorNombreNativeQuery("Anthony");
+		System.out.println("consulta 4: "+estu);
+		
+		//estu = this.estudianteService.buscarPorNombreNativeQueryTypedNamed("Anthony");
+		//System.out.println("consulta 5: "+estu);
 	}
 
 }

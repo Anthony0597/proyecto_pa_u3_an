@@ -44,4 +44,23 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		return this.estudianteRepo.buscarPorGeneroQuery(genero);
 	}
 
+	public Estudiante buscarPorNombreTypedQuery(String nombre) {
+		return this.estudianteRepo.buscarPorNombreTypedQuery(nombre);
+	}
+	
+	public Estudiante buscarPorNombreNamedQuery(String nombre) {
+		return this.estudianteRepo.buscarPorNombreNamedQuery(nombre);
+	}
+	
+	public Estudiante buscarPorNombreNamedQueryTyped(String nombre) {
+		return this.estudianteRepo.buscarPorNombreNamedQueryTyped(nombre);
+	}
+	
+	public Estudiante buscarPorNombreNativeQuery(String nombre) {
+		return this.estudianteRepo.buscarPorNombreNativeQuery(nombre);
+	}
+	public Estudiante buscarPorNombreNativeQueryTypedNamed(String nombre) {
+		return this.estudianteRepo.buscarPorNombreNativeQueryTypedNamed(nombre);
+	}
+	
 }
