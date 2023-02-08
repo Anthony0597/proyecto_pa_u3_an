@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,21 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	}
 	public Estudiante buscarPorNombreNativeQueryTypedNamed(String nombre) {
 		return this.estudianteRepo.buscarPorNombreNativeQueryTypedNamed(nombre);
+	}
+	
+	public List<Estudiante> buscarPorNombreQueryList(String nombre){
+		return this.estudianteRepo.buscarPorNombreNamedQueryList(nombre);
+	}
+	
+	public Estudiante buscarPorNombreQueryListFirst(String nombre){
+		return this.estudianteRepo.buscarPorNombreQueryListFirst(nombre);
+	}
+	
+	public List<Estudiante> buscarPorNombreNamedQueryList(String nombre){
+		return null;
+	}
+	public List<Estudiante> buscarPorNombreNativeQueryTypedNamedList(String nombre){
+		return null;
 	}
 	
 }

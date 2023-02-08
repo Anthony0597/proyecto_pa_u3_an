@@ -1,6 +1,7 @@
 package com.example.demo.repo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.example.demo.modelo.Estudiante;
 
@@ -15,4 +16,11 @@ public interface IEstudianteRepo {
 	public Estudiante buscarPorNombreNamedQueryTyped(String nombre);
 	public Estudiante buscarPorNombreNativeQuery(String nombre);
 	public Estudiante buscarPorNombreNativeQueryTypedNamed(String nombre);
+	
+	public List<Estudiante> buscarPorNombreQueryList(String nombre);
+	public List<Estudiante> buscarPorNombreNamedQueryList(String nombre);
+	public List<Estudiante> buscarPorNombreNativeQueryTypedNamedList(String nombre);
+	public Estudiante buscarPorNombreQueryListFirst(String nombre);
+	
+	public EstudianteDTO buscarPorNombreTypedQueryDTO(String nombre);
 }
