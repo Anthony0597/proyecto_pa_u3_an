@@ -34,12 +34,11 @@ public class ProyectoPaU3AnApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		//CREATE
-		List <Estudiante> estu = this.estudianteService.buscarPorNombreCriteriaAndOR("Anthony", "Sandoval", "M");
-		System.out.println("consulta 1: "+estu.get(0));	
+		/*int salida = this.estudianteService.eliminarPorApellido("Naranjo");
+		System.out.println(salida);
 		
-		estu = this.estudianteService.buscarPorNombreCriteriaAndOR("Martha", "Cumbal", "Femenino");
-		System.out.println("consulta 1: "+estu.get(0));	
-		
+		salida = this.estudianteService.actualizarPorApellido("Cumbal", "Diego");
+		System.out.println(salida);*/
 	}
 
 }
