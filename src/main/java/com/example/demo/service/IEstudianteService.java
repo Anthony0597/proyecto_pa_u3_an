@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.demo.modelo.Estudiante;
+import com.example.demo.modelo.dto.EstudianteDTO;
 
 import jakarta.persistence.TypedQuery;
 
@@ -22,5 +23,7 @@ public interface IEstudianteService {
 	public List<Estudiante> buscarPorNombreNamedQueryList(String nombre);
 	public List<Estudiante> buscarPorNombreNativeQueryTypedNamedList(String nombre);
 	public Estudiante buscarPorNombreQueryListFirst(String nombre);
-	public Estudiante buscarPorNombreTypedQueryDTO(String nombre);
+	public EstudianteDTO buscarPorNombreTypedQueryDTO(String nombre);
+	public Estudiante buscarPorNombreCriteria(String nombre);
+	public List<Estudiante> buscarPorNombreCriteriaAndOR(String nombre, String apellido, String bandera);
 }

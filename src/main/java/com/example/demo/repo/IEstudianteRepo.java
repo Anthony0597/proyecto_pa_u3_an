@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.demo.modelo.Estudiante;
+import com.example.demo.modelo.dto.EstudianteDTO;
 
 public interface IEstudianteRepo {
 	public Estudiante buscarPorNombreQuery(String nombre);
@@ -23,4 +24,7 @@ public interface IEstudianteRepo {
 	public Estudiante buscarPorNombreQueryListFirst(String nombre);
 	
 	public EstudianteDTO buscarPorNombreTypedQueryDTO(String nombre);
+	public Estudiante buscarPorNombreCriteria(String nombre);
+	public List<Estudiante> buscarPorNombreCriteriaAndOR(String nombre, String apellido, String bandera);
+	
 }
