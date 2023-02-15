@@ -1,5 +1,6 @@
 package com.example.demo.repo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -22,20 +23,12 @@ public class HotelRepoImpl implements IHotelRepo {
 	@Override
 	public List<Hotel> buscarHotelInnerJoin(String tipoHabitacion) {
 		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
-				"SELECT h FROM Hotel h JOIN h.habitaciones ha WHERE ha.tipo=: datoTipo",Hotel.class);
+				"SELECT h FROM Hotel h INNER JOIN h.habitaciones ha WHERE ha.tipo=: datoTipo",Hotel.class);
 		myQuery.setParameter("datoTipo", tipoHabitacion);
 		List<Hotel> lista=myQuery.getResultList();
 		//Bajo demanda
 		for(Hotel h:lista) {
-			List<Habitacion> temp= null;
-			for(Habitacion ha : h.getHabitaciones()) {
-				if(ha.getTipo().equals(tipoHabitacion)) {
-					temp.add(ha);
-				}
-				h.setHabitaciones(temp);
-			}
-			
-			
+			h.getHabitaciones().get(0);			
 		}
 		return lista;
 	}
@@ -66,12 +59,44 @@ public class HotelRepoImpl implements IHotelRepo {
 
 	@Override
 	public List<Hotel> buscarHotelOuterFullJoin(String tipoHabitacion) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h FULL JOIN h.habitaciones ha WHERE ha.tipo=: datoTipo",Hotel.class);
+		myQuery.setParameter("datoTipo", tipoHabitacion);
+		return myQuery.getResultList();
 	}
 
 	@Override
 	public List<Hotel> buscarHotelFetchJoin(String tipoHabitacion) {
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h JOIN FETCH h.habitaciones ha WHERE ha.tipo=: datoTipo",Hotel.class);
+		myQuery.setParameter("datoTipo", tipoHabitacion);
+		List<Hotel> lista=myQuery.getResultList();
+		for(Hotel h:lista) {
+			h.getHabitaciones().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Hotel> buscarHotelOuterRightJoin() {
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h RIGHT JOIN h.habitaciones ha",Hotel.class);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Hotel> buscarHotelOuterLeftJoin() {
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h LEFT JOIN h.habitaciones ha",Hotel.class);
+		List<Hotel> lista=myQuery.getResultList();
+		for(Hotel h:lista) {
+			h.getHabitaciones().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Hotel> buscarHotelOuterFullJoin() {
 		// TODO Auto-generated method stub
 		return null;
 	}

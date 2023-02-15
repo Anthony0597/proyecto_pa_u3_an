@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import com.example.demo.renta.service.IClienteService;
 import com.example.demo.renta.service.IRentaService;
 import com.example.demo.renta.service.IVehiculoService;
 import com.example.demo.service.IEstudianteService;
+import com.example.demo.service.IHabitacionService;
 import com.example.demo.service.IHotelService;
 
 @SpringBootApplication
@@ -30,6 +30,9 @@ public class ProyectoPaU3AnApplication implements CommandLineRunner{
 	@Autowired
 	private IHotelService hotelService;
 	
+	@Autowired
+	private IHabitacionService habitacionService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoPaU3AnApplication.class, args);
 	}
@@ -40,13 +43,7 @@ public class ProyectoPaU3AnApplication implements CommandLineRunner{
 		//CREATE
 		List <Hotel> hoteles = null;
 		
-		hoteles =this.hotelService.buscarHotelInnerJoin("VIP");
-		//hoteles=this.hotelService.buscarHotelOuterRightJoin("VIP");
-		//hoteles=this.hotelService.buscarHotelOuterLeftJoin("VIP");
-		//hoteles=this.hotelService.buscarHotelOuterFullJoin(null);
-		//hoteles=this.hotelService.buscarHotelFetchJoin(null);*/
-		
-		
+		hoteles=this.hotelService.buscarHotelFetchJoin("VIP");
 		for(Hotel h:hoteles) {
 			System.out.println(h.getNombre());
 			for(Habitacion ha:h.getHabitaciones()) {
@@ -54,6 +51,31 @@ public class ProyectoPaU3AnApplication implements CommandLineRunner{
 			}
 		}
 		
+		hoteles =this.hotelService.buscarHotelOuterLeftJoin();
+		for(Hotel h:hoteles) {
+			System.out.println(h.getNombre());
+			for(Habitacion ha:h.getHabitaciones()) {
+				System.out.println("Las habitacion de: "+h.getNombre()+" es :"+ha.getNumero());
+			}
+		}
+		
+		
+		List<Habitacion> habitaciones =this.habitacionService.buscarHabitacionOuterLeftJoin();
+		for(Habitacion ha:habitaciones) {
+			System.out.println(ha!=null? ha.getNumero():null);
+		}
+		
+		hoteles =this.hotelService.buscarHotelOuterRightJoin();
+		for(Hotel h:hoteles) {
+			System.out.println(h!=null?h.getNombre():null);
+		}
+		
+		
+		habitaciones =this.habitacionService.buscarHabitacionOuterRightJoin();
+		for(Habitacion ha:habitaciones) {
+			System.out.println(ha!=null? ha.getNumero():null);
+			//System.out.println(ha.getHotel());
+		}
 		
 	}
 
